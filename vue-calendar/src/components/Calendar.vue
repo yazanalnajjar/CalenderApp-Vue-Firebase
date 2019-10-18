@@ -251,7 +251,7 @@ export default {
       if(this.name && this.start && this.end) {
 
       }else{
-        alert("Name, start ")
+        alert("Name, start and end date are required ");
       }
     },
     async updateEvent() {
