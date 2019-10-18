@@ -15,7 +15,7 @@ export default {
     Calendar
   },
   data: () => ({
-    //
+    
   }),
 };
 </script>
