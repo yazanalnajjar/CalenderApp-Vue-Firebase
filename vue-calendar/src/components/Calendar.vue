@@ -127,23 +127,67 @@ export default {
     events: [],
     dialog: false,
   }),
+  
     mounted () {
     this.getEvents()
   },
    methods: {
      async getEvents () {
-      let snapshot =await db.collection('calEvent').get();
+      let snapshot =await db.collection('calevent').get();
     
-      const events = [];
+      let events = [];
       snapshot.forEach(doc => {
-        
+        console.log(doc);
         let appData = doc.data();
         appData.id = doc.id;
         events.push(appData);
 
         });
          this.events = events;
+        },
+
+        viewDay ({ date }) {
+        this.focus = date
+        this.type = 'day'
+      },
+      getEventColor (event) {
+        return event.color
+      },
+      setToday () {
+        this.focus = this.today
+      },
+      prev () {
+        this.$refs.calendar.prev()
+      },
+      next () {
+        this.$refs.calendar.next()
+      },
+      showEvent ({ nativeEvent, event }) {
+        const open = () => {
+          this.selectedEvent = event
+          this.selectedElement = nativeEvent.target
+          setTimeout(() => this.selectedOpen = true, 10)
         }
+
+        if (this.selectedOpen) {
+          this.selectedOpen = false
+          setTimeout(open, 10)
+        } else {
+          open()
+        }
+
+        nativeEvent.stopPropagation()
+      },
+      updateRange ({ start, end }) {
+        // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+        this.start = start
+        this.end = end
+      },
+      nth (d) {
+        return d > 3 && d < 21
+          ? 'th'
+          : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
+      },
     }
     
 }
