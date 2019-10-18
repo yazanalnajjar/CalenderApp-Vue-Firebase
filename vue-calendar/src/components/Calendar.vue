@@ -249,6 +249,20 @@ export default {
     async addEvent(){
 
       if(this.name && this.start && this.end) {
+          await db.collection('calEvent').add({
+            name : this.name,
+            details : this.details,
+            start : this.start,
+            end : this.end,
+            color :  this.color
+          });
+
+          this.getEvents();
+          this.name = "";
+          this.detials = "";
+          this.start = "";
+          this.end = "";
+          this.color = "";
 
       }else{
         alert("Name, start and end date are required ");
