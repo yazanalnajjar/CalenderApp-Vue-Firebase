@@ -251,7 +251,7 @@ export default {
       if(this.name && this.start && this.end) {
 
       }else{
-        
+        alert("Name, start ")
       }
     },
     async updateEvent() {
