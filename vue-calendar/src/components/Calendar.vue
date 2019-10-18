@@ -142,7 +142,7 @@ export default {
         events.push(appData);
 
         });
-        this.events = events;
+         this.events = events;
         }
     }
     
